@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
+const shop = express();
 const port = 5000;
 
 let stock = [
@@ -24,35 +24,56 @@ let stock = [
     }
 ]
 
-app.use(cors());
-app.get('/stock', (req, res) => {
-    res.send(stock);
+shop.use(cors());
+
+shop.get('/stock', (req, res) => {
+    let response = {
+        data: stock,
+        message: "This call has retrieved all stock information."
+    }
+    res.send(response);
 });
-app.get('/value', (req, res) => {
+
+shop.get('/value', (req, res) => {
     let total = 0;
    stock.forEach((z) => {
     total += (z.quantity * z.price)
    })
-   res.send(total.toString())
+   let response = {
+       data: total.toString(),
+       message: "This call has calculated and returned the total value of all stock"
+   }
+   res.send(response)
 });
-app.delete('/:id', (req, res) => {
+
+shop.delete('/:id', (req, res) => {
     let x = Number(req.params.id)
     stock.forEach(y => {
         if (y.id === x){
             y.quantity --;
         }
     })
-    res.send(stock)
+    let response = {
+        data: stock,
+        message: "This call will decrease the stock quantity by 1 and return the resulting stock count"
+    }
+    res.send(response)
 })
-app.post('/:id/restock', (req, res) => {
+
+shop.post('/:id/restock', (req, res) => {
     let x = Number(req.params.id)
     stock.forEach(y => {
         if (y.id === x){
             y.quantity += y.caseSize;
         }
     })
-    res.send(stock)
+    let response = {
+        data: stock,
+        message: "This call will decrease the stock quantity by 1 and return the resulting stock count"
+    }
+    res.send(response)
 }) 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+
+shop.listen(port, () => {
+    console.log(`Example shop listening on port ${port}`);
 });

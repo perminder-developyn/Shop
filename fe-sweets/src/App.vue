@@ -18,10 +18,6 @@
 	Open Shop
 </button>
 Stock Total Value : € {{total}}
-<button v-on:click="subTotal()"
->
-	Calculate Total Stock
-</button>
 </template>
 
 <script>
@@ -32,8 +28,9 @@ export default {
 	methods: {
 		updateShop() {
 			this.count ++;
+			this.subTotal();
 			axios.get(`http://localhost:5000/stock`).then(res => {
-				res.data.forEach((e)=> {
+				res.data.data.forEach((e)=> {
 					this.shop.push(e)
 				})
 			})
@@ -41,7 +38,7 @@ export default {
 		sell(e) {
 			axios.delete(`http://localhost:5000/${e.id}`).then(res => {
 				this.shop = [];
-				res.data.forEach((e)=> {
+				res.data.data.forEach((e)=> {
 					this.shop.push(e)
 				})
 			})
@@ -49,14 +46,14 @@ export default {
 		order(e) {
 			axios.post(`http://localhost:5000/${e.id}/restock`).then(res => {
 				this.shop = [];
-				res.data.forEach((e) => {
+				res.data.data.forEach((e) => {
 					this.shop.push(e)
 				})
 			})
 		},
 		subTotal() {
 			axios.get(`http://localhost:5000/value`).then(res => {
-				this.total = res.data
+				this.total = res.data.data
 			})
 		}
 	},
@@ -67,6 +64,11 @@ export default {
 			total: ""
 		};
 	},
+	watch: {
+		shop() {
+			this.subTotal()
+		}
+	}
 }
 </script>
 
