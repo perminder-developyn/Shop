@@ -30,8 +30,8 @@ export default {
 			this.count ++;
 			this.subTotal();
 			axios.get(`http://localhost:5000/stock`).then(res => {
-				res.data.data.forEach((e)=> {
-					this.shop.push(e);
+				res.data.data.forEach((item)=> {
+					this.shop.push(item);
 				});
 			});
 		},
