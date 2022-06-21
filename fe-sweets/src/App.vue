@@ -35,19 +35,19 @@ export default {
 				});
 			});
 		},
-		sell(e) {
-			axios.delete(`http://localhost:5000/${e.id}`).then(res => {
+		sell(item) {
+			axios.delete(`http://localhost:5000/${item.id}`).then(res => {
 				this.shop = [];
-				res.data.data.forEach((e)=> {
-					this.shop.push(e);
+				res.data.data.forEach((item)=> {
+					this.shop.push(item);
 				});
 			});
 		},
-		order(e) {
-			axios.post(`http://localhost:5000/${e.id}/restock`).then(res => {
+		order(item) {
+			axios.post(`http://localhost:5000/${item.id}/restock`).then(res => {
 				this.shop = [];
-				res.data.data.forEach((e) => {
-					this.shop.push(e);
+				res.data.data.forEach((item) => {
+					this.shop.push(item);
 				});
 			});
 		},
