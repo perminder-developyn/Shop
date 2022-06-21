@@ -11,7 +11,7 @@ let stock = [
         description: 'Sweet and tasty sugar',
         price: 12,
         currency: 'EUR',
-        quantity: 350,
+        quantity: 1,
         caseSize: 6
     },
     {
@@ -20,7 +20,7 @@ let stock = [
         description: 'Caramelly deliciousness',
         price: 1,
         currency: 'EUR',
-        quantity: 2000,
+        quantity: 1,
         caseSize: 100
     }
 ];
@@ -55,7 +55,9 @@ shop.delete('/:id', (req, res) => {
     let x = Number(req.params.id)
     stock.forEach(y => {
         if (y.id === x){
-            y.quantity --;
+            if (y.quantity > 0) {
+                y.quantity --;
+            }
         }
     })
     let response = {
