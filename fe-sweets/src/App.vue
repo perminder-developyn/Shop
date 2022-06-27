@@ -3,7 +3,7 @@
 		{{item.name}}
 		<button v-on:click="order(item)"
 		> 
-			Order Case : {{item.caseSize}}
+			Order Case : {{item.casesize}}
 		</button>
 		{{item.currency}} €
 		{{item.price}}
@@ -17,7 +17,9 @@
 >
 	Open Shop
 </button>
-Stock Total Value : € {{total}}
+<div v-if="shop.length > 1">
+	Stock Total Value : € {{total}}
+</div>
 </template>
 
 <script>
@@ -27,6 +29,8 @@ export default {
 	name: "App",
 	methods: {
 		updateShop() {
+			this.shop = [];
+			this.count = 0;
 			this.count ++;
 			this.subTotal();
 			axios.get(`http://localhost:5000/stock`).then(res => {
@@ -36,24 +40,18 @@ export default {
 			});
 		},
 		sell(item) {
-			axios.delete(`http://localhost:5000/${item.id}`).then(res => {
-				this.shop = [];
-				res.data.data.forEach((item)=> {
-					this.shop.push(item);
-				});
-			});
+			axios.delete(`http://localhost:5000/${item.id}`).then(
+				this.updateShop()
+			);
 		},
 		order(item) {
-			axios.post(`http://localhost:5000/${item.id}/restock`).then(res => {
-				this.shop = [];
-				res.data.data.forEach((item) => {
-					this.shop.push(item);
-				});
-			});
+			axios.post(`http://localhost:5000/${item.id}/restock`).then(
+				this.updateShop()
+			);
 		},
 		subTotal() {
 			axios.get(`http://localhost:5000/value`).then(res => {
-				this.total = res.data.data;
+				this.total = res.data;
 			});
 		}
 	},
@@ -63,11 +61,6 @@ export default {
 			shop: [],
 			total: ""
 		};
-	},
-	watch: {
-		shop() {
-			this.subTotal();
-		}
 	}
 }
 </script>
