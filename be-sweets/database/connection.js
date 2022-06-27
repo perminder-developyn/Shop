@@ -18,6 +18,7 @@ exports.get_stock = async () => {
 	`).then(response => stock = response.rows);
 	return stock;
 };
+
 exports.get_value = async () => {
     let sum;
     await knex.raw(`
@@ -25,19 +26,20 @@ exports.get_value = async () => {
         FROM stock
     `).then(response => sum = response.rows);
     return sum;
-}
+};
+
 exports.reduce_item = async (e) => {
     await knex.raw(`
         UPDATE stock
         SET quantity = quantity - 1
         WHERE id = '${e.id}'
-    `).then(response => response.rows)
-}
+    `).then(response => response.rows);
+};
 
 exports.order_item = async (e) =>  {
    await knex.raw(`
          UPDATE stock
          SET quantity = quantity + casesize
          WHERE id = '${e.id}'
-     `).then(response => response.rows)
-}
+     `).then(response => response.rows);
+};
