@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const database = require('./database/connection')
 const shop = express();
-const port = 5000;
+const port = 8080;
 
 // the express app uses cors settings imported on line 2
 shop.use(cors());
