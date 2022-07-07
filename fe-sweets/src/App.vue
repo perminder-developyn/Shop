@@ -33,24 +33,24 @@ export default {
 			this.count = 0;
 			this.count ++;
 			this.subTotal();
-			axios.get(`http://api/stock`).then(res => {
+			axios.get(`http://18.132.16.240:8080/stock`).then(res => {
 				res.data.data.forEach((item)=> {
 					this.shop.push(item);
 				});
 			});
 		},
 		sell(item) {
-			axios.delete(`http://api/${item.id}`).then(
+			axios.delete(`http://18.132.16.240:8080/${item.id}`).then(
 				this.updateShop()
 			);
 		},
 		order(item) {
-			axios.post(`http://api/${item.id}/restock`).then(
+			axios.post(`http://18.132.16.240:8080/${item.id}/restock`).then(
 				this.updateShop()
 			);
 		},
 		subTotal() {
-			axios.get(`http://api/value`).then(res => {
+			axios.get(`http://18.132.16.240:8080/value`).then(res => {
 				this.total = res.data;
 			});
 		}
