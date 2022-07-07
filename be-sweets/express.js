@@ -6,6 +6,9 @@ const port = 5000;
 
 // the express app uses cors settings imported on line 2
 shop.use(cors());
+shop.get('/', (req, res) => {
+    console.log(req, res)
+})
 
 //  a get request that will retrieve the stock array and a message about the call
 shop.get('/stock', (req, res) => {
