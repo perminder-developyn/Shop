@@ -35,7 +35,7 @@ export default {
 			this.subTotal();
 			axios.get(`http://18.132.16.240:8080/stock`).then(res => {
 				console.log(res)
-				res.data.data.forEach((item)=> {
+				res.data.forEach((item)=> {
 					this.shop.push(item);
 				});
 			});
