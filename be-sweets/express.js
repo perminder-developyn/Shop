@@ -25,10 +25,10 @@ let stock = [
 ]
 
 app.use(cors());
-app.get('/', (req, res) => {
-    res.status(200).send({success: "success"})
+app.get('localhost:8080/', (req, res) => {
+    res.status(200)
 })
-app.get('/stock', (req, res) => {
+app.get('localhost:8080/stock', (req, res) => {
     res.send(stock);
 });
 app.get('/value', (req, res) => {
