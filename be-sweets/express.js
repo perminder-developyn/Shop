@@ -25,20 +25,20 @@ let stock = [
 ]
 
 app.use(cors());
-app.get('api/', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).send({success: "success"})
 })
-app.get('api/stock', (req, res) => {
+app.get('/stock', (req, res) => {
     res.send(stock);
 });
-app.get('api/value', (req, res) => {
+app.get('/value', (req, res) => {
     let total = 0;
    stock.forEach((z) => {
     total += (z.quantity * z.price)
    })
    res.send(total.toString())
 });
-app.delete('api/:id', (req, res) => {
+app.delete('/:id', (req, res) => {
     let x = Number(req.params.id)
     stock.forEach(y => {
         if (y.id === x){
@@ -47,7 +47,7 @@ app.delete('api/:id', (req, res) => {
     })
     res.send(stock)
 })
-app.post('api/:id/restock', (req, res) => {
+app.post('/:id/restock', (req, res) => {
     let x = Number(req.params.id)
     stock.forEach(y => {
         if (y.id === x){
