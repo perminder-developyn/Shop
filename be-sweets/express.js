@@ -26,7 +26,7 @@ let stock = [
 
 app.use(cors());
 app.get('/', (req, res) => {
-    res.send.status(200)
+    res.status(200).send('hi')
 })
 app.get('/stock', (req, res) => {
     res.send(stock);
