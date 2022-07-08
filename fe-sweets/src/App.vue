@@ -33,7 +33,7 @@ export default {
 			this.count = 0;
 			this.count ++;
 			this.subTotal();
-			axios.get(`/stock`).then(res => {
+			axios.get(`:8080/stock`).then(res => {
 				console.log(res)
 				res.data.forEach((item)=> {
 					this.shop.push(item);
