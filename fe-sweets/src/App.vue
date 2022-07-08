@@ -33,7 +33,7 @@ export default {
 			this.count = 0;
 			this.count ++;
 			this.subTotal();
-			axios.get(`/stock`).then(res => {
+			axios.get(`:8080/stock`).then(res => {
 				console.log(res)
 				res.data.forEach((item)=> {
 					this.shop.push(item);
@@ -41,17 +41,17 @@ export default {
 			});
 		},
 		sell(item) {
-			axios.delete(`/${item.id}`).then(
+			axios.delete(`:8080/${item.id}`).then(
 				this.updateShop()
 			);
 		},
 		order(item) {
-			axios.post(`/${item.id}/restock`).then(
+			axios.post(`:8080/${item.id}/restock`).then(
 				this.updateShop()
 			);
 		},
 		subTotal() {
-			axios.get(`/value`).then(res => {
+			axios.get(`:8080/value`).then(res => {
 				this.total = res.data;
 			});
 		}
