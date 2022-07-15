@@ -35,7 +35,7 @@ const updateShop = () => {
 	count ++;
 	subTotal();
 	axios.get(`http://localhost:8000/stock`).then(res => {
-				shop = res.data;
+		shop = res.data;
 	})
 };
 const sell = (item) => {
@@ -50,7 +50,7 @@ const order = (item) => {
 };
 const subTotal = () => {
 	axios.get(`http://localhost:8000/value`).then(res => {
-				total = res.data;
+		total = res.data;
 	});
 };
 
