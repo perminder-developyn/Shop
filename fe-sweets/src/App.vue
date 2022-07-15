@@ -33,7 +33,7 @@ export default {
 			this.count = 0;
 			this.count ++;
 			this.subTotal();
-			axios.get(`https://perminder.developyn.com/stock`).then(res => {
+			axios.get(`api/stock`).then(res => {
 				console.log("frontend ->",res)
 				res.data.forEach((item)=> {
 					this.shop.push(item);
@@ -41,17 +41,17 @@ export default {
 			});
 		},
 		sell(item) {
-			axios.delete(`https://perminder.developyn.com/${item.id}`).then(
+			axios.delete(`api/${item.id}`).then(
 				this.updateShop()
 			);
 		},
 		order(item) {
-			axios.post(`https://perminder.developyn.com/${item.id}/restock`).then(
+			axios.post(`api/${item.id}/restock`).then(
 				this.updateShop()
 			);
 		},
 		subTotal() {
-			axios.get(`https://perminder.developyn.com/value`).then(res => {
+			axios.get(`api/value`).then(res => {
 				this.total = res.data;
 			});
 		}
