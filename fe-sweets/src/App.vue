@@ -34,7 +34,7 @@ export default {
 			this.count ++;
 			this.subTotal();
 			axios.get(`https://perminder.developyn.com/stock`).then(res => {
-				console.log(res)
+				console.log("frontend ->",res)
 				res.data.forEach((item)=> {
 					this.shop.push(item);
 				});
